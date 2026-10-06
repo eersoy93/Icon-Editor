@@ -84,3 +84,7 @@ icon_editor/png.py      PNG encoder/decoder
 icon_editor/fileio.py   loading/saving helpers
 tests/                  unit tests
 ```
+
+## Copyright and License
+
+MIT licensed. See LICENSE file for deatils.
