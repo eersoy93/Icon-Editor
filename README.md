@@ -87,4 +87,4 @@ tests/                  unit tests
 
 ## Copyright and License
 
-MIT licensed. See LICENSE file for deatils.
+MIT licensed. See [LICENSE](LICENSE) file for deatils.
