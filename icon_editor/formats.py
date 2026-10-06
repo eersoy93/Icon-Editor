@@ -284,9 +284,7 @@ def read_ico(data):
             raise IconFormatError("Image %d points outside of the file" % n)
         hotspot = (f1, f2) if itype == CUR_TYPE else (0, 0)
         if is_png(blob):
-            w, h, rgba = decode_png(blob)
-            if w > MAX_SIZE or h > MAX_SIZE:
-                raise IconFormatError("Image larger than %d pixels" % MAX_SIZE)
+            w, h, rgba = decode_png(blob, MAX_SIZE)
             images.append(IconImage(w, h, rgba, hotspot))
         else:
             images.append(_decode_dib(blob, hotspot))
@@ -457,10 +455,7 @@ def load_document(path):
     if data[:4] == b"RIFF":
         return read_ani(data)
     if is_png(data):
-        w, h, rgba = decode_png(data)
-        if w > MAX_SIZE or h > MAX_SIZE:
-            raise IconFormatError("PNG images larger than %d pixels are not supported"
-                                  % MAX_SIZE)
+        w, h, rgba = decode_png(data, MAX_SIZE)
         return IconDocument("ico", [Frame([IconImage(w, h, rgba)])])
     kind, images = read_ico(data)
     return IconDocument(kind, [Frame(images)])

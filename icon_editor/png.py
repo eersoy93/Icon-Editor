@@ -106,8 +106,12 @@ def _samples(row, count, depth):
     return out
 
 
-def decode_png(data):
-    """Decode PNG bytes. Returns ``(width, height, rgba_bytearray)``."""
+def decode_png(data, max_size=None):
+    """Decode PNG bytes. Returns ``(width, height, rgba_bytearray)``.
+
+    When ``max_size`` is given, images wider or taller than it are rejected
+    before any pixel data is decompressed.
+    """
     data = bytes(data)
     if not is_png(data):
         raise PNGError("Not a PNG file")
@@ -134,6 +138,10 @@ def decode_png(data):
             break
     if width is None:
         raise PNGError("Missing IHDR chunk")
+    if width == 0 or height == 0:
+        raise PNGError("Invalid PNG dimensions")
+    if max_size is not None and (width > max_size or height > max_size):
+        raise PNGError("PNG image larger than %d pixels" % max_size)
     if interlace:
         raise PNGError("Interlaced PNG images are not supported")
     channels = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}.get(ctype)

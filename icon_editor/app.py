@@ -40,6 +40,7 @@ FILE_TYPES = {
 UNDO_LIMIT = 100
 CHECKER = 8  # size of the transparency checkerboard cells in screen pixels
 MAX_CANVAS = 4096  # maximum zoomed image size in screen pixels
+MAX_IMPORT_SIZE = 4096  # largest PNG accepted by "Import PNG" (scaled down)
 
 
 def rgba_hex(rgba):
@@ -943,7 +944,7 @@ class IconEditorApp:
             return
         try:
             with open(path, "rb") as fh:
-                w, h, rgba = decode_png(fh.read())
+                w, h, rgba = decode_png(fh.read(), MAX_IMPORT_SIZE)
         except (OSError, ValueError) as exc:
             messagebox.showerror("Import failed", str(exc))
             return
