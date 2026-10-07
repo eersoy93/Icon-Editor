@@ -1335,7 +1335,7 @@ class IconEditorApp:
         from . import __version__
         messagebox.showinfo(
             "About", "%s %s\n\nCreate and edit Windows icons (.ico), cursors (.cur) "
-            "and animated cursors (.ani).\n\nWritten in Python and Tkinter."
+            "and animated cursors (.ani).\n\nWritten in Python and Tkinter. Written by Erdem Ersoy (eersoy93) with GitHub Copilot."
             % (APP_NAME, __version__), parent=self.root)
 
     def quit(self):
