@@ -1,4 +1,4 @@
-# Icon-Editor
+# Icon Editor
 
 An icon editor written in Python and Tkinter. It creates and edits Windows
 icons (`.ico`), cursors (`.cur`) and animated cursors (`.ani`).
